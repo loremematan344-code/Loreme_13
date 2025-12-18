@@ -1,20 +1,20 @@
-// Wait until the HTML document is fully loaded before running the script
+//means mo run ang code kung fully loaded na ang html
 document.addEventListener("DOMContentLoaded", () => {
 
-  // Select all habit containers on the page
-  const habitContainers = document.querySelectorAll(".habit-container");
+//gikuha ang tanan na div nga naay class.habit contaner
+const habitContainers = document.querySelectorAll(".habit-container");
 
-  // Loop through each habit container
-  habitContainers.forEach((container, index) => {
+// kada usa na habit container index and gamiton unique na key sa local storage 
+habitContainers.forEach((container, index) => {
 
-    // Get all checkboxes, progress bar, and streak display inside the container
-    const checkboxes = container.querySelectorAll("input[type='checkbox']");
+//gikuha tanan pati ang mga streak, progress, etc 
+  const checkboxes = container.querySelectorAll("input[type='checkbox']");
     const progressBar = container.querySelector(".progress");
     const streakDisplay = container.querySelector(".streak");
     const totalDays = checkboxes.length;
 
-    // Calculate the current streak of consecutive checked days (from the last day backwards)
-    function calculateStreak() {
+//calculate tanang days 
+  function calculateStreak() {
       let streak = 0;
       for (let i = totalDays - 1; i >= 0; i--) {
         if (checkboxes[i].checked) {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return streak;
     }
 
-    // Save checkbox states to localStorage so progress persists after refresh
+    // gi save ang  checkbox states to localStorage so progress persists after refresh
     function save() {
       const states = [...checkboxes].map(cb => cb.checked);
       localStorage.setItem(`habit_${index}`, JSON.stringify(states));
@@ -81,3 +81,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
